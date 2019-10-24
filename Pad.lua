@@ -5,7 +5,8 @@ local defaultPadParams = {
 }
 local defaultButtonParams = {
 	baseW = 0, baseH = 0,
-	color = 0,
+	bgColor = 0, 
+	txtColor = 0, 
 	text = "", name = "", 
 	margin = 0,
 	gridwidth = 1, gridheight = 1,
