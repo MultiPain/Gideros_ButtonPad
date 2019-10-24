@@ -75,9 +75,9 @@ function Pad:init(params)
 	self.buttons = {}
 	-- event to dispatch 
 	self.__evt = Event.new("click")
-	-- forst touch id (to prevent multitouch)
+	-- first touch id (to prevent multitouch)
 	self.first_id = -1
-	-- button that was touched in "tpuchBegin" event
+	-- button that was touched in "touchBegin" event
 	self.touchedBtn = nil
 	
 	self:addEventListener(Event.TOUCHES_BEGIN, self.touchBegin, self)
@@ -94,11 +94,8 @@ function Pad:addButton(params)
 	append(params, defaultButtonParams)
 	
 	-- calculate correct size for button depending on gridwidth and gridheight
-	local w = (self.baseW*params.gridwidth) + (params.gridwidth-1)*(self.innerMargin*2)
-	local h = (self.baseH*params.gridheight) + (params.gridheight-1)*(self.innerMargin*2)
-	
-	params.w = w
-	params.h = h
+	params.w = (self.baseW*params.gridwidth) + (params.gridwidth-1)*(self.innerMargin*2)
+	params.h = (self.baseH*params.gridheight) + (params.gridheight-1)*(self.innerMargin*2)
 	
 	-- create button 
 	local p = Button.new(params)
@@ -122,9 +119,9 @@ function Pad:addButton(params)
 end
 
 function Pad:touchBegin(e)
-	local x, y = e.touch.x, e.touch.y
 	-- disable mutitouch
 	if (self.first_id == -1) then
+		local x, y = e.touch.x, e.touch.y
 		self.first_id = e.touch.id
 		-- chech if button clicked
 		for i,b in ipairs(self.buttons) do 
